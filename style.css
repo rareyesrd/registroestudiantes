@@ -7,7 +7,14 @@
 .bg-gray{
     background-color: #f9f9f9;
 }
-
+.thead-purple{
+    background: #400082;
+    color: #fff;
+}
+.form{
+    width: 360px;
+    margin: 90px auto 0 auto;
+}
 .form .title{
     width: 100%;
     border-top-left-radius: 4px;
@@ -24,10 +31,27 @@
     text-transform: uppercase;
 }
 
-.form{
-    width: 360px;
-    margin: 90px auto 0 auto;
+
+form .form-row{
+    margin: 0 auto;
 }
-form input{
+
+form .form-row .form-group{
+    margin-top: 10px;
+}
+
+form .form-control{
     border: #fff;
+    border-radius: 0px 0px !important;
+}
+button[type="submit"]{
+    width: 100%;
+    background-color: #f7f7f7;
+    color: #000;
+    border-color: #400082;
+    margin-top: 10px;
+    font-weight: bold;
+}
+button[type="submit"]:hover{
+    background-color: #400082;
 }
