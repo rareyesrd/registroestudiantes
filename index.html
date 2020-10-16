@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Title</title>
+    <title>Registro de Estudiantes</title>
 </head>
 
 <body>
@@ -34,11 +34,11 @@
                         <input type="text" class="form-control" id="sexo" placeholder="Sexo">
                     </div>
                     <div class="form-group col-12">
-                        <label for="sexo" class="pl-1">Color favorito</label>
-                        <input type="color" id="head" name="head" value="#000">
+                        <label for="color" class="pl-1">Color favorito</label>
+                        <input type="color" id="color" name="head" value="#000">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary" id="save">Guardar</button>
             </form>
         </div>
     </div>
@@ -47,41 +47,18 @@
         <div class="container">
             <table class="table">
                 <thead class="thead-purple">
-                  <tr>
-                    <th scope="col">Matrícula</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Carrera</th>
-                    <th scope="col">Sexo</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">Matrícula</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Carrera</th>
+                        <th scope="col">Sexo</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Masculino</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>Femenino</td>
 
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>Otro</td>
-                  </tr>
                 </tbody>
-              </table>
-              
-             
+            </table>
         </div>
     </div>
 
@@ -90,7 +67,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+        let matricula = document.getElementById('matricula');
+        let name = document.getElementById('name');
+        let lastname = document.getElementById('lastname');
+        let carrera = document.getElementById('carrera');
+        let sexo = document.getElementById('sexo');
+        let color = document.getElementById('color');
+        let save = document.getElementById('save');
+        let table = document.querySelector('.table');
+        let newItem = document.getElementsByName('tbody');
+        const arr = [matricula, name, lastname, carrera, sexo, color];
 
+        const checkData = (el) =>{
+            if(el.value){
+                let data = localStorage.setItem(`${data}`, data.value);
+                console.log(localStorage.getItem(data))
+            }else{
+                console.log('false');
+            }
+        }; 
+
+        save.addEventListener('click', (e)=>{
+            e.preventDefault();
+            for(let el of arr){
+                checkData(el);
+            }
+        })
+
+           
     </script>
 </body>
 
