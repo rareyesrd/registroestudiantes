@@ -43,7 +43,7 @@ form .form-control{
     border: #fff;
     border-radius: 0px 0px !important;
 }
-button[type="submit"]{
+button[type="button"]{
     width: 100%;
     background-color: #f7f7f7;
     color: #000;
@@ -51,6 +51,6 @@ button[type="submit"]{
     margin-top: 10px;
     font-weight: bold;
 }
-button[type="submit"]:hover{
+button[type="button"]:hover{
     background-color: #400082;
 }

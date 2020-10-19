@@ -12,20 +12,20 @@
     <title>Registro de Estudiantes</title>
 </head>
 
-<body>
+<body onload="sendData()">
     <div class="form">
         <div class="row">
             <div class="title">Registro de estudiantes</div>
-            <form>
+            <form id="form">
                 <div class="form-row bg-gray">
                     <div class="form-group col-12">
-                        <input type="number" class="form-control" id="matricula" placeholder="Matrícula">
+                        <input type="text" class="form-control" id="matricula" placeholder="Matrícula">
                     </div>
                     <div class="form-group col-6">
-                        <input type="text" class="form-control" id="name" placeholder="Nombre">
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
                     </div>
                     <div class="form-group col-6">
-                        <input type="text" class="form-control" id="lastname" placeholder="Apellido">
+                        <input type="text" class="form-control" id="apellido" placeholder="Apellido">
                     </div>
                     <div class="form-group col-12">
                         <input type="text" class="form-control" id="carrera" placeholder="Carrera">
@@ -34,11 +34,10 @@
                         <input type="text" class="form-control" id="sexo" placeholder="Sexo">
                     </div>
                     <div class="form-group col-12">
-                        <label for="color" class="pl-1">Color favorito</label>
-                        <input type="color" id="color" name="head" value="#000">
+                        <input type="text" class="form-control" id="color" placeholder="Color">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="save">Guardar</button>
+                <button type="button" class="btn btn-primary" id="save">Guardar</button>
             </form>
         </div>
     </div>
@@ -53,9 +52,10 @@
                         <th scope="col">Apellido</th>
                         <th scope="col">Carrera</th>
                         <th scope="col">Sexo</th>
+                        <th scope="col">Color</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbdata">
 
                 </tbody>
             </table>
@@ -67,35 +67,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        let matricula = document.getElementById('matricula');
-        let name = document.getElementById('name');
-        let lastname = document.getElementById('lastname');
-        let carrera = document.getElementById('carrera');
-        let sexo = document.getElementById('sexo');
-        let color = document.getElementById('color');
-        let save = document.getElementById('save');
-        let table = document.querySelector('.table');
-        let newItem = document.getElementsByName('tbody');
-        const arr = [matricula, name, lastname, carrera, sexo, color];
-
-        const checkData = (el) =>{
-            if(el.value){
-                let data = localStorage.setItem(`${data}`, data.value);
-                console.log(localStorage.getItem(data))
-            }else{
-                console.log('false');
+        var data = [];
+        const save = document.getElementById('save');
+        const form = document.getElementById('form');
+        save.addEventListener('click', () => {
+            inps = document.getElementsByTagName('input');
+            for (k in inps) {
+                if (inps[k].value == '') {
+                    alert("Debe completar  " + inps[k].id);
+                    return false;
+                }
             }
-        }; 
 
-        save.addEventListener('click', (e)=>{
-            e.preventDefault();
-            for(let el of arr){
-                checkData(el);
+            persona = {};
+            persona.matricula = document.getElementById('matricula').value;
+            persona.nombre = document.getElementById('nombre').value;
+            persona.apellido = document.getElementById('apellido').value;
+            persona.carrera = document.getElementById('carrera').value;
+            persona.sexo = document.getElementById('sexo').value;
+            persona.color = document.getElementById('color').value;
+
+            data.push(persona);
+
+            showData();
+
+            localStorage.setItem('data', JSON.stringify(data));
+
+            completed(form);
+
+        });
+
+        function completed(form) {
+            form.reset();
+        }
+
+        function sendData() {
+            tmp = localStorage.getItem('data');
+            if (tmp != null) {
+                data = JSON.parse(tmp);
+                for (let d of data) {
+                    showData();
+                }
+
             }
-        })
+        }
 
-           
+        function showData() {
+            output = document.getElementById('tbdata');
+            for (k in data) {
+                persona = data[k];
+                tr = document.createElement('tr');
+            }
+            for (y in persona) {
+                td = document.createElement('td');
+                td.innerHTML = persona[y];
+                tr.appendChild(td);
+            }
+            output.appendChild(tr);
+        }
     </script>
+
 </body>
 
 </html>
